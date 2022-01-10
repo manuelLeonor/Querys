@@ -1,0 +1,29 @@
+select
+	r.storeid,
+	s.name,
+	r.ID registerid,
+	r.account,
+	cuo.Val cajero,
+	u.login,
+	r.CreationDate,
+	r.Closed,
+	ra.ErpSendStatusID EstatusApertura,
+	ra.ErpDocumentID ,
+	ro.Total,
+    sd.totalnotas,
+    sd.totalventa,
+	ro.ErpSendStatusID EstatusCorte,
+	ro.ErpDocumentID,
+	ro.id roid
+from Register r
+inner join store s on s.id = r.storeid
+inner join [user] u on u.id = r.CreationUserID
+left join (
+select SUM(total) totalventa, Registerid, COUNT(id) totalnotas from SaleDocument group by registerid
+) sd on sd.RegisterID = r.id
+left join ConfigurationUserOption cuo on cuo.UserID = r.CreationUserID and cuo.ConfigurationOptionDefinitionID =  33104
+left join RegisterActivity ra on r.ID = ra.RegisterID and ra.DocumentTypeID = 4
+left join RegisterCloseOut ro on r.ID = ro.RegisterID and ro.DocumentTypeID in (9,36)
+--where s.id =
+where r.account ='CAQE00031'
+Order by r.id desc;

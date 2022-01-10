@@ -1,0 +1,36 @@
+Query para cambiar la zona horaria sbx cambio de horario
+
+Entre mayor sea el numero el horario se reduce
+Entre menor sea el numero el horario aumenta
+
+Ejemplo si se tiene el numero 2 en store options y son las 10:00 am
+si se cambia a 3 el horario cambia a 9:00 am
+si se cambia a 1 el horario cambia a 11:00 am
+
+
+select * from storeoptions where id=100014
+
+--update storeoptions set optionvalue = '2' where optionvalue = '1' and id=100014
+
+Horaro invierno
+
+update storeoptions set optionvalue='2' where id=100014 and optionvalue <> '3'
+
+update storeoptions set optionvalue='3' where id=100014 and optionvalue='2'
+
+update storeoptions set optionvalue='2' where id=100014 and optionvalue='1'
+
+update storeoptions set optionvalue='1' where id=100014 and optionvalue='0'
+
+
+Horario verano
+
+
+update storeoptions set optionvalue=
+00014 and optionvalue = '3'
+
+update storeoptions set optionvalue='1' where id=100014 and optionvalue='2'
+
+update storeoptions set optionvalue='0' where id=100014 and optionvalue='1'
+
+

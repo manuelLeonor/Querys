@@ -1,0 +1,37 @@
+
+Revisar si hay datos en la tabla temporal INVT_TMP
+
+select * from invt_tmp (habia registros)
+Delete From Invt_tmp
+
+Insertar los datos de la comparacion en la tabla temporal
+
+insert into invt_tmp select i.* from invt i
+where i.store = 1
+and i.barcode not in (select i2.barcode from invt i2 where i2.store = 2)
+
+
+Hacemos la actualizacion a la tabla temporal con la nueva tienda y ponemos
+todo en 0
+
+*Query si usan SBX v1
+
+update invt_tmp set
+store=7,quan=0,rcvd=0,sold=0,ord=0,bo=0,mini = 0, intransit=0,first_rcvd=null,last_rcvd=null,last_sold=null,last_xfer=null,purch=0,sales=0,ADJ=0,uuid=f_newid()
+
+
+Insert into INVT Select * From Invt_Tmp
+
+select store, count(*) from invt group by store
+
+*Si tienen solo RUNIT
+
+update invt_tmp set
+store=7,quan=0,rcvd=0,sold=0,ord=0,bo=0,mini = 0, intransit=0,first_rcvd=null,last_rcvd=null,last_sold=null,last_xfer=null,purch=0,sales=0,ADJ=0
+
+
+Insert into INVT Select * From Invt_Tmp
+
+
+
+
